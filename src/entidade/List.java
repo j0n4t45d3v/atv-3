@@ -20,6 +20,26 @@ public class List {
         this.tail = node;
     }
 
+    public void checkOrderList(){
+        Node p = this.head;
+        boolean check = false;
+
+        while(p != null && p.getNext() != null){
+            if(p.getValue() < p.getNext().getValue()){
+                check = true;
+            }else{
+                check = false;
+                break;
+            }
+            p = p.getNext();
+        }
+        if(check){
+            System.out.println("A lista esta ordenada.");
+        }else{
+            System.out.println("A lista não esta ordenada.");
+        }
+    }
+
     public void printList(){
         Node p = this.head;
 

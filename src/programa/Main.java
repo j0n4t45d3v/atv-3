@@ -11,6 +11,7 @@ public class Main {
         l.add(2);
         l.add(3);
         l.printList();
+        l.checkOrderList();
         l2.add(0);
         l2.add(10);
         l2.add(20);
