@@ -20,6 +20,33 @@ public class List {
         this.tail = node;
     }
 
+//EM PRODUÇÃO.
+    public void sort(){
+        Node p = this.head;
+        Node prev = null;
+
+        while(p != null && p.getNext() != null){
+            if(p.getValue() > p.getNext().getValue()){
+                if(p.getNext().equals(this.tail)){
+                    prev.setNext(p.getNext());
+                    p.getNext().setNext(p);
+                    this.tail = p;
+                    this.tail.setNext(null);
+                    break;
+                } else if(p.equals(this.head)){
+                    prev = new Node(p.getNext().getValue());
+                    p.setNext(p.getNext().getNext());
+                    prev.setNext(p);
+                    this.head = prev;
+                } else{
+                    prev.setNext(p.getNext());
+                }
+            }
+            prev = p;
+            p = p.getNext();
+        }
+    }
+
     public void checkOrderList(){
         Node p = this.head;
         boolean check = false;
@@ -50,5 +77,6 @@ public class List {
             p = p.getNext();
         }
         System.out.println("]");
+        System.out.println("head: "+this.head.getValue()+"\ntail: "+this.tail.getValue());
     }
 }
