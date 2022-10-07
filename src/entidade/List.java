@@ -25,38 +25,19 @@ public class List {
 
 //EM PRODUÇÃO.
     public void sort(){
+        Node p = this.head;
         Node prev = null;
-        int cont = 0;
 
-        while(!checkOrderList()){
-            for (Node j = this.head; cont < this.size; j = j.getNext()){
-                 if(this.head.getValue() > j.getValue()){
 
-                    if(j.equals(this.head.getNext())){
-                        this.head.setNext(j.getNext());
-                    } else if (j.equals(this.tail)) {
-                        this.tail = prev;
-                        prev.setNext(null);
-                    } else{
-                        prev.setNext(j.getNext());
-                    }
-                    j.setNext(this.head);
-                    this.head = j;
-                } else if (this.tail.getValue() < j.getValue()) {
-                    if(j.equals(this.head)){
-                        this.head = j.getNext();
-                    } else{
-                        prev.setNext(j.getNext());
-                    }
-                    this.tail.setNext(j);
-                    this.tail = j;
-                    this.tail.setNext(null);
+        for(int i = 0; i < this.size; i ++){
+            for (int j = 0; j < this.size;j ++){
+                if(p.getValue() > p.getNext().getValue()){
+                    Node e = p;
+                    p.getNext().setValue(p.getValue());
+                    p.setValue(e.getNext().getValue());
+
                 }
-
-                prev = j;
-                cont++;
             }
-            cont ++;
         }
 
     }
@@ -90,7 +71,7 @@ public class List {
         Node p = this.head;
 
         System.out.print("[");
-        for(int i = 0; i < this.size;i++){
+        while(p != null){
             if(p.equals(this.head)) System.out.print(p.getValue());
             else System.out.print(", "+p.getValue());
             p = p.getNext();

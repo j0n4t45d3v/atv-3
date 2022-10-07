@@ -9,8 +9,8 @@ public class Main {
 
         l.add(2);
         l.add(1);
-        l.add(4);
         l.add(3);
+        l.add(4);
         l.sort();
         l.printList();
         l.checkOrderList();
