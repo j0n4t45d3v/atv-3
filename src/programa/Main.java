@@ -8,10 +8,9 @@ public class Main {
         List l2 = new List();
 
         l.add(2);
+        l.add(1);
         l.add(4);
         l.add(3);
-        l.add(1);
-
         l.sort();
         l.printList();
         l.checkOrderList();
@@ -19,5 +18,8 @@ public class Main {
         l2.add(10);
         l2.add(20);
         l2.printList();
+        l2.checkOrderList();
+        l2.blendList(l);
+        l.printList();
     }
 }

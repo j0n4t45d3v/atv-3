@@ -3,10 +3,12 @@ package entidade;
 public class List {
     private Node head;
     private Node tail;
+    private int size;
 
     public List() {
         this.head = null;
         this.tail = null;
+        this.size = 0;
     }
 
     public void add(int value){
@@ -18,36 +20,48 @@ public class List {
             this.tail.setNext(node);
         }
         this.tail = node;
+        this.size++;
     }
 
 //EM PRODUÇÃO.
     public void sort(){
-        Node p = this.head;
         Node prev = null;
+        int cont = 0;
 
-        while(p != null && p.getNext() != null){
-            if(p.getValue() > p.getNext().getValue()){
-                if(p.getNext().equals(this.tail)){
-                    prev.setNext(p.getNext());
-                    p.getNext().setNext(p);
-                    this.tail = p;
+        while(!checkOrderList()){
+            for (Node j = this.head; cont < this.size; j = j.getNext()){
+                 if(this.head.getValue() > j.getValue()){
+
+                    if(j.equals(this.head.getNext())){
+                        this.head.setNext(j.getNext());
+                    } else if (j.equals(this.tail)) {
+                        this.tail = prev;
+                        prev.setNext(null);
+                    } else{
+                        prev.setNext(j.getNext());
+                    }
+                    j.setNext(this.head);
+                    this.head = j;
+                } else if (this.tail.getValue() < j.getValue()) {
+                    if(j.equals(this.head)){
+                        this.head = j.getNext();
+                    } else{
+                        prev.setNext(j.getNext());
+                    }
+                    this.tail.setNext(j);
+                    this.tail = j;
                     this.tail.setNext(null);
-                    break;
-                } else if(p.equals(this.head)){
-                    prev = new Node(p.getNext().getValue());
-                    p.setNext(p.getNext().getNext());
-                    prev.setNext(p);
-                    this.head = prev;
-                } else{
-                    prev.setNext(p.getNext());
                 }
+
+                prev = j;
+                cont++;
             }
-            prev = p;
-            p = p.getNext();
+            cont ++;
         }
+
     }
 
-    public void checkOrderList(){
+    public boolean checkOrderList(){
         Node p = this.head;
         boolean check = false;
 
@@ -60,10 +74,15 @@ public class List {
             }
             p = p.getNext();
         }
-        if(check){
-            System.out.println("A lista esta ordenada.");
-        }else{
-            System.out.println("A lista não esta ordenada.");
+
+        return check;
+    }
+
+    public void blendList(List l){
+        Node p = this.head;
+        for (int i = 0; i < this.size; i++){
+            l.add(p.getValue());
+            p = p.getNext();
         }
     }
 
@@ -71,7 +90,7 @@ public class List {
         Node p = this.head;
 
         System.out.print("[");
-        while(p != null){
+        for(int i = 0; i < this.size;i++){
             if(p.equals(this.head)) System.out.print(p.getValue());
             else System.out.print(", "+p.getValue());
             p = p.getNext();
