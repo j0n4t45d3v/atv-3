@@ -23,26 +23,22 @@ public class List {
         this.size++;
     }
 
-//EM PRODUÇÃO.
     public void sort(){
         Node p = this.head;
-        Node prev = null;
-
 
         for(int i = 0; i < this.size; i ++){
             for (int j = 0; j < this.size;j ++){
                 if(p.getValue() > p.getNext().getValue()){
-                    Node e = p;
-                    p.getNext().setValue(p.getValue());
-                    p.setValue(e.getNext().getValue());
-
+                    int e = p.getValue();
+                    p.setValue(p.getNext().getValue());
+                    p.getNext().setValue(e);
                 }
             }
         }
 
     }
 
-    public boolean checkOrderList(){
+    public void checkOrderList(){
         Node p = this.head;
         boolean check = false;
 
@@ -55,8 +51,14 @@ public class List {
             }
             p = p.getNext();
         }
+        if(check){
+            System.out.println("A lista esta ordenada.");
+        }else{
+            System.out.println("A lista não está ordenada.");
+            System.out.println("Ordenando...");
+            sort();
+        }
 
-        return check;
     }
 
     public void blendList(List l){

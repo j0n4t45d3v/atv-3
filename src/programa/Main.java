@@ -11,14 +11,13 @@ public class Main {
         l.add(1);
         l.add(3);
         l.add(4);
-        l.sort();
-        l.printList();
         l.checkOrderList();
-        l2.add(0);
+        l.printList();
         l2.add(10);
         l2.add(20);
-        l2.printList();
+        l2.add(30);
         l2.checkOrderList();
+        l2.printList();
         l2.blendList(l);
         l.printList();
     }
